@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
         status: :created,
         logged_in: true,
         user: user
-      } else {
+      } 
+    else
       render json: { status: 401 }
-      }
     end
   end
 end
