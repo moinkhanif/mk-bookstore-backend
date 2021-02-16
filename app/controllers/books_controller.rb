@@ -1,3 +1,4 @@
+require 'httparty'
 class BooksController < ApplicationController
   def create
   end
@@ -24,5 +25,13 @@ class BooksController < ApplicationController
         status: "Please login to view"
       }
     end
+  end
+  def suggest
+    key = ENV["BOOKS_API_KEY"]
+    query = params["query"]
+    abc = HTTParty.get("https://www.googleapis.com/books/v1/volumes?q=#{query}&key=#{key}")
+    render json: {
+      "hey": JSON.parse(abc.body)
+    }
   end
 end
